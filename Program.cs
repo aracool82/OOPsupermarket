@@ -5,7 +5,7 @@ namespace Supermarket
 {
     public class Program
     {
-        public static Random random = new Random();
+        public static Random Random = new Random();
         
         public static void Main()
         {
@@ -22,7 +22,7 @@ namespace Supermarket
             {
                 for (int i = 0; i < count; i++)
                 {
-                    Client client = new Client(random.Next(250,401));
+                    Client client = new Client(Random.Next(250,401));
                     client.FillBasket(CreateClientBasket());
                     clients.Add(client);
                 }
@@ -36,12 +36,12 @@ namespace Supermarket
             List<string> listProduct = new List<string>(){"Чупа-чупс","Колла","Яблоки","Хлеб","Масло","Колбаса",
                 "Мука","Сгущенка","Печенье","Конфеты" ,"Огурцы","Шоколад"};
             
-            int count = random.Next(3, 7);
+            int count = Random.Next(3, 7);
             
             for (int i = 0; i < count; i++)
             {
-                string name = listProduct[random.Next(0, listProduct.Count)];
-                int price = random.Next(20, 150);
+                string name = listProduct[Random.Next(0, listProduct.Count)];
+                int price = Random.Next(20, 150);
                 newProducts.Add(new Product(name,price));
             }
             return newProducts;
@@ -50,11 +50,12 @@ namespace Supermarket
 
     public class Supermarket
     {
-        private Queue<Client> _queueCLients= new Queue<Client>();
+        private Queue<Client> _queueCLients;
         public List<Client> Clients { get; }
 
         public Supermarket(List<Client> clients)
         {
+            _queueCLients= new Queue<Client>();
             Clients = clients;
             foreach (var client in Clients)
                 _queueCLients.Enqueue(client);
@@ -104,7 +105,7 @@ namespace Supermarket
         {
             if (clientBasket.Count > 0)
             {
-                int number = Program.random.Next(0, clientBasket.Count);
+                int number = Program.Random.Next(0, clientBasket.Count);
                 Console.WriteLine(clientBasket[number].Name + " был удален");
                 clientBasket.RemoveAt(number);
             }
